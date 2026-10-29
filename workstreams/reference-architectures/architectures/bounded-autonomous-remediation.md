@@ -243,9 +243,9 @@ flowchart TD
 
 A deterministic gate produces the verdict that admits a candidate. Its acceptance criteria and required evidence depend on the use case and the business domain. The business domain considers factors such as blast radius, reversibility, cost and other consequences when defining the gate. This architecture does not specify gate strength or the checks a gate performs.
 
-An acceptance record is a structured entry capturing a deterministic gate's verdict for a specific candidate. It identifies the candidate, the gate version, the evidence considered and the run.
-
 Effects a domain judges irreversible or wide-reaching are not admitted here by adding evidence. A named human authorization before a protected effect belongs to the [human-approved operation](single-agent-human-approval.md). Fleet-wide or fan-out effects need a composition that is not yet documented.
+
+An acceptance record is a structured entry capturing a deterministic gate's verdict for a specific candidate. It identifies the candidate, the gate version, the evidence considered and the run.
 
 Four properties hold for every acceptance record, independent of gate strength:
 
@@ -259,8 +259,6 @@ In the worked scenario each candidate's gate verdict (CI plus contract checks) i
 A second step in that scenario separates acceptance from completion. Candidate A passes the gate and the acceptance record is written. The pull-request creation is then dispatched and the response times out, so the effect is unconfirmed rather than absent. The acceptance record stays valid, because nothing in it depended on the dispatch returning. What is missing is evidence that the effect landed, so reconciliation must establish whether the pull request already exists before another attempt.
 
 > An acceptance record establishes that the identified candidate passed the declared checks. Completion requires separate effect confirmation; an ambiguous dispatch result requires reconciliation before retry.
-
-The sentence above is quoted from the comment by [@imran-siddique](https://github.com/imran-siddique) on this pull request, dated 2026-09-21. That comment also asked for the routing above.
 
 ## Out of scope (handled elsewhere)
 
